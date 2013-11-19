@@ -2,10 +2,9 @@ import os
 import time
 import subprocess
 
-def NUB():
-    pass
-
 def zipit():
+    '''Zip the files and upload them for sharing via IRC.'''
+    
     os.chdir('..')
     botname = "MasterBotCode"
     # Better not pollute the code directory.
