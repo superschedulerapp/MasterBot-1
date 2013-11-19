@@ -13,7 +13,6 @@ import os
 
 run = 2
 Connected = 1
-importData.initData()
 while Connected:
     Socker = socket.socket()
     os.system('dir')
