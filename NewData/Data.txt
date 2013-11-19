@@ -1,13 +1,11 @@
 ##Please change the required fields below! Everything else should be handled for you. 
 ##lines starting with % is login info, # are channels, @ are default users.
 
-%HOST,irc.freenode.net
-%PORT,6667
-%NICK,[CCB]Prime
-%IDENT,Prime,bot
-%REALNAME,PrimeBot
-%OWNER,ichaleynbin
-%PASS,newbotpass5
-%RespondTo, * P [CCB] [CCB]P Prime [CCB]Prime
-#chaoscorebots
-@ichaleynbin 99
+%HOST,
+%PORT,
+%NICK,
+%IDENT,
+%REALNAME,
+%OWNER,
+%PASS,
+%RespondTo,
