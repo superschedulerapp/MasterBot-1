@@ -1,0 +1,15 @@
+##Please change the required fields below! Everything else should be handled for you. 
+##lines starting with % is login info, # are channels, @ are default users.
+
+%HOST,irc.freenode.net
+%PORT,6667
+%NICK,ChangeMe!
+%IDENT,ChangeMe!
+%REALNAME,ChangeMe!
+%OWNER,ChangeMe!
+%PASS,ChangeMe!
+%RespondTo, ChangeMe!
+##edx-ai
+#ChangeMe
+@ichaleynbin 99
+@ChangeMe ChangeMe

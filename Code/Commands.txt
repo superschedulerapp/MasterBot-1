@@ -1,0 +1,67 @@
+!Win ::0 {0} {1} :You're a Winner, {2}! ::1 fillers = [0,Channel,Target] ::8 0 1 1
+!Kick ::0 {0} {1} {2} \n {3} {1} :Kicking user {2} from channel {1} for being a silly ninny and a nitwit. ::1 fillers = [6,Channel,Target,M.Cmd[0],User] ::8 70 3 1
+!Index ::0 {0} {1} :Here are the Indices you requested: {2} \n PRIVMSG {1} :And their channels: {3} ::1 fillers = [0,Target,l2s(Extras),l2s(map(lambda x:l2s(MasterBotter.Storage.Channels[x]),Extras))] ::8 0 1 1
+!Mime ::0 {0} {1} :{2} ::1 fillers = [0,Target,l2s(Extras)] ::8 30 3 1
+!PM ::0 {0} {1} :{2} ::1 fillers = [0,Target,l2s(Extras)] ::8 30 3 1
+!Join ::0 {0} :{1} ::1 Extras = Extras if Target[0][0] != '#' else Target; fillers = [5,Extras] ::8 70 3 1
+!Leave ::0 {0} :{1} ::1 Channel = Extras if len(Extras) > 0 else Channel; fillers = [4,Channel] ::8 70 3 1
+!Register ::0 {0} {1} :{2} {3} ::1 LI = MasterBotter.Storage.LoginInfo; p = (User in LI); LI[User] = (LI[User] if p else l2s(Extras[0])) ; fillers = [0,User,('Registered you with password ' if not p else 'This User already exists!'),l2s(Extras[0])] ::8 0 1 1
+!Login ::0 {0} {1} :{2} ::1 p = l2s(Extras); pa = (MasterBotter.Storage.LoginInfo[User] if User in MasterBotter.Storage.LoginInfo else ''); MasterBotter.Storage.LoggedInfo[User] = (ID if p == pa else -1) ; fillers = [0,User,('You have been logged in!' if p == pa else 'That is not the correct password!')] ::8 0 1 1
+!Cam ::0 {0} {1} :Greetings, Commodore! ::1 fillers = [0, User] ::8 0 1 2
+!ERR1 ::0 {0} {1} :Please give me a valid command to run! If you need help, use !M Help ::1 fillers = [0, User] ::8 0 1 2
+!ERR2 ::0 {0} {1} :You must be logged in to use this command! ::1 fillers = [0,User] ::8 0 1 2
+!ERR3 ::0 {0} {1} :You do not have sufficient permissions to use this command! ::1 fillers = [0,User] ::8 0 1 2
+!!AddCommand ::0 {0} {1} :Added your new command to my Commands file and Reloaded! I hope you know what you're doing! ::1 f = open('Code/Commands.txt','r+'); f.readlines(); f.write(l2s(Extras)+'\\n');f.close(); fillers = [0,User] ::8 90 3 3 ::9 1 1
+!!Reload ::0 {0} {1} :Reloading my commands! ::1 fillers = [0,User] ::8 90 3 3 ::9 1 1
+!!Reboot ::0 {0} {1} :Reloading my commands, and Rebooting my Runcode! ::1 fillers = [0,User] ::8 90 3 3 ::9 1 0
+!!Reconnect ::0 {0} {1} :Reloading my commands, Rebooting my Runcode, Reloading MasterBotter, Reconnecting to the network! ::1 fillers = [0,User] ::8 90 3 3 ::9 1 -1
+!!Quit ::0 {0} {1} :Signing off and saying 'Good Night!' ::1 fillers = [0,User] ::8 90 3 3 ::9 0 -1
+!Broadcast ::0 {0} {1} :Broadcast from {2}: {3} ::1 fillers = [0, Channel,User,l2s(Extras)] ::8 30 3 1
+!Bot ::0 {0} {1} :{3} {2}{4} ::1 fillers = [0,(Target if Target != User else Channel),l2s(Extras),M.Cmd[7],M.Cmd[8]] ::8 30 3 1
+!OpMe ::0 {0} {1} +o {2} ::1 fillers = [1,Channel,Target] ::8 70 3 1
+!AddUser ::0 {0} {1} :Added User {2} at permissions {3} ::1 MasterBotter.Storage.Users[(Target[-1]if type(Target) == type([]) else Target)] = int(Extras[0]); fillers = [0,User,(Target[-1]if type(Target) == type([]) else Target),Extras[0]] ::8 70 3 1
+!Bookmark ::0 {0} {1} :{2} ::1 MasterBotter.Storage.AddChans(Channel,Extras); global P; P = map(lambda x:x in MasterBotter.Storage.Channels,Extras); l = map(lambda x:map(lambda y:('Added Channel '+y+' to the following index: '+Extras[x] if P[x] else 'Please give me a real index!'),Channel),range(len(P))); fillers= [0,User,l] ::8 70 3 1
+!UnBookmark ::0 {0} {1} :Removed Channel {2} from index {3}! ::1 MasterBotter.Storage.DelChans(Channel,Extras); fillers = [0,Target,Channel,Extras] ::8 70 3 1
+!CreateChannelIndex ::0 {0} {1} :Created Channel Index: {2} ::1 l2 = MasterBotter.Storage.isIndex(Extras,1); fillers = [0,User,l2]; MasterBotter.Storage.AddIndex(l2) ::8 70 3 1
+!DeleteChannelIndex ::0 {0} {1} :Deleted Channel Index: {2} ::1 l2 = MasterBotter.Storage.isIndex(Extras); fillers = [0,User,Extras]; MasterBotter.Storage.DelIndex(l2) ::8 70 3 1
+!ShowIndices ::0 {0} {1} :I know of the following indices: {2} ::1 fillers = [0,Target,l2s(MasterBotter.Storage.Channels.keys())] ::8 0 2 1
+!UpdateCode ::0 {0} {1} :New code requests will have a new link! ::1 os.system('touch ../MasterBot/'); fillers = [0,User] ::8 90 3 1
+!ForgetChan ::0 {0} {1} :Deleting Channel {2} from all of my indices! ::1 MasterBotter.Storage.DelChanAll(Channel); fillers = [0,User,Channel] ::8 70 3 1
+!Help ::0 {0} {1} :To use a command, first address me, then use your command. Commands are not case sensitive. Target channels with @# and users with @. Substitute the User (if subtitute has lower permissions) with ^. Anything after :: is Extra options. \n {0} {1} :I respond to the following names: {2} \n {0} {1} :For you, I know the following commands: {3} ::1 global f,perm; perm = (MasterBotter.Storage.Users[User] if User in MasterBotter.Storage.Users else 0);f = lambda x:(x if perm >= M.Permissions[x] else ''); com = map(lambda y: f(y),M.Helps[1]); fillers = [0,User,l2s(storage.CI['RespondTo']),l2s(com)] ::8 0 1 1
+!DevHelp ::0 {0} {1} :The Developers Commands which I know that you can use are as follows: {2} ::1 global f,perm; perm = (MasterBotter.Storage.Users[User] if User in MasterBotter.Storage.Users else 0);f = lambda x:(x if perm >= M.Permissions[x] else ''); com = map(lambda y: f(y),M.Helps[3]); fillers = [0,User,l2s(com)] ::8 0 1 1
+!CodeLink ::0 {0} {1} :Here is a link to my source code: {2} ::1 fillers = [0,Target,zipIt.zipit()] ::8 0 1 3
+!!Suggest ::0 {0} {1} :Added your suggestion! ::1 f = open('./UserData/Suggestions','r+'); f.readlines(); f.write('\n'+l2s(Extras)); f.close();fillers = [0,User] ::8 0 2 3
+!InviteUser ::0 {0} {1} {2} \n {3} {4} :Inviting {1} to {2} ::1 fillers = [2,Target,Channel,M.Cmd[0],User] ::8 70 3 1
+!Request ::0 {0} {1} :Added your request for {2} ::1 l = l2s(Extras); f = open('./UserData/suggestions.txt'); f.readlines(); f.write('\n'+l);f.close();fillers = [0,User,l] ::8 0 2 1
+!xkcd ::0 {0} {1} :Here's a link to a random xkcd comic! http://xkcd.com/{2}/ ::1 fillers = [0,Target,random.randint(1,1135)] ::8 0 1 1
+!UserList ::0 {0} {1} :{2} ::1 l = 'I know of the following users:\n '+l2s(map(lambda x:'PRIVMSG '+User+' :User: '+x+' at permission level '+str(MasterBotter.Storage.Users[x])+'.\n' ,MasterBotter.Storage.Users.keys())); fillers = [0,Target,l] ::8 70 3 1
+!DelUser ::0 {0} {1} :Deleting user {2} from my permissions dictionary! ::1 l = map(lambda x: MasterBotter.Storage.Users.pop(x),Extras); fillers = [0,User,l] ::8 70 3 1 
+!SaveData ::0 {0} {1} :Saving all of the data that I can! ::1 fillers = [0,User]; MasterBotter.Store() ::8 70 3 1
+!PermLogin ::0 {0} {1} :Permanently logging you in at your current shown IP! I hope know what you're doing! ::1 fillers = [0,User]; MasterBotter.Storage.PermLoggedInfo[User] = ID ::8 0 2 3
+!sakh ::0 {0} {1} :lacist ::1 fillers = [0,Channel] ::8 0 1 1
+!ichaleynbin ::0 {0} {1} :This kid breaks stuff ::1 fillers = [0,Channel] ::8 0 1 1
+!StartTrivia ::0 {0} {1} :Starting round of trivia! ::1 TriviaBot.Start(Channel); fillers = [0,Channel] ::8 50 3 1
+!Garmine ::0 {0} {1} :A micro-super computer. You know, like huge midgets. ::1 fillers = [0,Channel] ::8 0 1 1
+!CrashIt ::0 this by no means will successfully send to IRC {0} even though I have it formattable properly ::1 fillers = [0]; This will also crash the program as this should be python! ::8 0 1 1
+!izua ::0 {0} {1} :You \n {0} {1} :All \n {0} {1} :Suck \n {0} {1} :Cock ::1 fillers = [0,Channel] ::8 30 3 1
+!Errs ::0 {0} {1} :The Error Commands which I know as follows: {2} ::1 global f,perm; perm = (MasterBotter.Storage.Users[User] if User in MasterBotter.Storage.Users else 0);f = lambda x:(x if perm >= M.Permissions[x] else ''); com = map(lambda y: f(y),M.Helps[2]); fillers = [0,User,l2s(com)] ::8 0 1 3
+!Clap ::0 {0} {1} :A round of applause for the big kahuna! \n {0} {1} :clap-clap-clap-clap-clap ::1 fillers = [0,Channel] ::8 0 1 1
+!PlayerHighscore ::0 {0} {1} :Player {2} has the following highscore: {3}. ::1 scores = (d2t(HighScores.Players[HighScores.playerNames[Extras[0]]]['hiScores']) if len(Extras) == 1 else map(lambda x:(x,HighScores.Players[HighScores.playerNames[Extras[0]]]['hiScores'][int(x)]),Extras[1:]));fillers = [0,Target,Extras[0],map(lambda x:HStypes[int(x[0])] + ' -- Position: '+ x[1][0] + '. Points: ' +x[1][1],scores)] ::8 0 1 1
+!ReloadHighscores ::0 {0} {1} :Reloaded Highscore Data! ::1 reload(HighScores); fillers = [0,User] ::8 50 3 1
+!FindPlayerCoords ::0 {0} {1} :Player {2} has a planet at location: {3} ::1 pName = HighScores.playerNames[Extras[0]]; fillers = [0,Target,Extras[0],list(HighScores.Players[pName]['Planets'])] ::8 0 1 1
+!AddPlanet ::0 {0} {1} :Added planet location {2} to player {3} ::1 f = open("addiLocs","r+"); f.readlines(); f.write(l2s(Extras+'\\n'));f.close(); HighScores.Players[HighScores.playerNames[Extras[0]]]['Planets'].add(Extras[1]);fillers = [0,Target,Extras[1], Extras[0]] ::8 50 3 1
+!NickChange ::0 NICK :{0} ::1 fillers = [Extras[0]] ::8 90 3 1
+!Coffee ::0 {0} {1} :{4} brews a steaming cup of joe fresh for {2}. {3} ::1 fillers = [0, Channel, User,'\x01', '\x01ACTION'] ::8 0 1 1
+!Beer ::0 {0} {1} :{4} goes on a beer run for {2} while wishing people would use him for more than a gopher. {3} ::1 fillers = [0, Channel, User,'\x01', '\x01ACTION'] ::8 0 1 1
+!Diodon ::0 {0} {1} :I reckon! ::1 fillers = [0, Channel] ::8 0 1 1
+!GetTopAllies ::0 {0} {1} :{2} ::1 fillers = [0, Target,HighScores.allyScores(HighScores.rankD,int(Extras[0]), int(Extras[1]))] ; print fillers ::8 0 1 1
+!getTopAlliesPerPlayer ::0 {0} {1} :{2} ::1 fillers = [0, Target, HighScores.allyScores(HighScores.perRankD, int(Extras[0]), int(Extras[1]), True)] ::8 0 1 1
+!GetAllyRank ::0 {0} {1} :The alliance with tag {2} has {3} rank of {4}. ::1 fillers = [0, Target, Extras[0], HStypes[int(Extras[1])], HighScores.allianceData[Extras[0]]['Rank'][int(Extras[1])][0]] ::8 0 1 1
+!GetAllyRankPerPlayer ::0 {0} {1} :The alliance with tag {2} has {3} per player rank of {4}. ::1 fillers = [0, Target, Extras[0], HStypes[int(Extras[1])], HighScores.allianceData[Extras[0]]['Rank'][int(Extras[1])][1]] ::8 0 1 1
+!ShowMe ::0 {0} {1} :HighScores.Players[100692]['Planets'] ::1 fillers = [0, User] ::8 0 1 1
+!ShowMe2 ::0 {0} {1} :{2} ::1 fillers = [0, User,HighScores.Players[100692]['Planets']] ::8 0 1 1
+!Coin ::0 {0} {1} :I just flipped a coin and got {2}! ::1 fillers = [0,Channel,("heads" if random.randint(0,1) else "tails")] ::8 0 1 1
+!D6 ::0 {0} {1} :I just rolled a six sided die and got {2}! ::1 fillers = [0,Channel,random.randint(1,6)] ::8 0 1 1
+!D3 ::0 {0} {1} :I just rolled a three sided die and got {2}! ::1 fillers = [0,Channel,random.randint(1,3)] ::8 0 1 1
+!D10 ::0 {0} {1} :I just rolled a ten sided die and got {2}! ::1 fillers = [0,Channel,random.randint(1,10)] ::8 0 1 1
+!DN ::0 {0} {1} :I just rolled a(n) {3} sided die and got {2}! ::1 fillers = [0,Channel,random.randint(1,int(Extras[0])),Extras[0]] ::8 0 1 1

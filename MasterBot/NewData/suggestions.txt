@@ -1,0 +1,10 @@
+:elimirks!~elijah@208.68.36.163 PRIVMSG ##edx-ai :!Request Calculate
+:ichaleynbin!~dar@unaffiliated/ichaleynbin PRIVMSG ##edx-ai ::elimirks!~elijah@208.68.36.163 PRIVMSG ##edx-ai :!Request Calculate
+:elimirks!~elijah@208.68.36.163 PRIVMSG ##edx-ai :!Request Calc
+:ichaleynbin!~dar@unaffiliated/ichaleynbin PRIVMSG ##edx-ai :! for some strange reason anything with equest in it shows up
+:elimirks!~elijah@208.68.36.163 PRIVMSG ##edx-ai :!* Request Calc
+:elimirks!~elijah@208.68.36.163 PRIVMSG ##edx-ai :!request Calc
+:elimirks!~elijah@208.68.36.163 PRIVMSG ##edx-ai :!* request Calc
+:elimirks!~elijah@208.68.36.163 PRIVMSG ##edx-ai :!Request Package -- Automatically package up the bot and upload to filebin
+:arjunatberkeley!~Adium@66-117-145-231.lmi.net PRIVMSG [CCB]MasterBot :!request help
+:sakh!~sakh@ppp121-44-108-202.lns20.syd6.internode.on.net PRIVMSG ##edx-ai :!Request jump off
