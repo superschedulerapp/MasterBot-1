@@ -5,6 +5,12 @@ import time
 from Code import Runcode, BotTalking, MasterBotter,cmds
 import os
 
+#This is the main script which runs everything. 
+#Its only job is to interpret the return value from Runcode.running()
+#and execute what needs to happen based on the two variables, 
+#and then execute .running() again (unless connected == 0, which is
+#what is returned upon using the !Quit command.)
+
 run = 2
 Connected = 1
 importData.initData()
