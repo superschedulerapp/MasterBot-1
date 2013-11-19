@@ -17,11 +17,11 @@ importData.initData()
 while Connected:
     Socker = socket.socket()
     os.system('dir')
-    Storg = Runcode.Datas(open('./UserData/Data.txt','r'))
+    Storg = Runcode.Datas(open('UserData/Data.txt','r'))
     Runcode.init(Socker,Storg)
     Connected,run = 1,1;print "Connected!"
     while run >=0:
-        Storg = Runcode.Datas(open('./UserData/Data.txt','r'))
+        Storg = Runcode.Datas(open('UserData/Data.txt','r'))
         run = 1; print "Booted"
         while run > 0:
             run = 2; print "Loaded"
