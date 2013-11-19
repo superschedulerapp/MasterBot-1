@@ -2,7 +2,8 @@ import random
 import MasterBotter
 import zipIt
 import os
-import HighScores
+#import HighScores
+#Uncomment above line to enable Ogame Highscore abilities.
 
 HStypes = {0:'Total',1:'Economy',2:'Research',3:'Military',5:'Military Built'
                     ,6:'Military Destroyed',4:'Military Lost',7:'Honor'}
