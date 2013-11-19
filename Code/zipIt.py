@@ -3,7 +3,7 @@ import time
 import subprocess
 
 def zipit():
-    '''Zip the files and upload them for sharing via IRC.'''
+    '''Zip the files and upload them for sharing via link sent to IRC.'''
     
     os.chdir('..')
     botname = "MasterBotCode"
