@@ -5,7 +5,10 @@ import time
 import os
 
 class Data():
+    '''Where a goodly portion of the data that the bot uses to connect to where
+    it needs to be is contained, as well as methods for dealing with the data.'''
     def __init__(self):
+        '''Load known data.'''
         os.chdir('UserData')
         try: file1 = open('ChannelsPickle','r')
         except IOError:
@@ -74,6 +77,7 @@ class Data():
 Storage = Data()
 
 def Store(Mem = Storage):
+    '''Dump known data.'''
     os.chdir('UserData')
     file1 = open('ChannelsPickle','w+')
     pickle.dump(Mem.Channels,file1)
@@ -96,6 +100,7 @@ def Store(Mem = Storage):
     os.chdir('..')
 
 def Maintenance(Sock,Storg,Mem =Storage):
+    '''A second attempt at using one bot to control other bots of the same type.'''
     Mem.Bots = {}
     Sock.send('NAMES #chaoscorebots\n')
     line = ''

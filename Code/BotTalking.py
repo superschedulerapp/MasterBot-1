@@ -1,6 +1,8 @@
 import socket
 import commands
 
+##File was built to allow multiple versions of the bot to talk to each other. 
+
 
 def myIP():
     ips = commands.getoutput("/sbin/ifconfig | grep -i \"inet\" | grep -iv \"inet6\" | " +

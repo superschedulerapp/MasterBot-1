@@ -1,6 +1,14 @@
 import urllib2
 import signal
 
+#Code specific to Ogame.org, which will parse and return requested
+#high score data to the IRC channel. 
+#Known problems: Connection timeouts are not handled properly, resulting
+#in the script possibly hanging. The solution implemented with signal
+#results in the entire scipt being crashed rather than just this one. 
+#As this (ogame highscore) fucntionality is non-essential I recommend
+#simply disabling rather than attempting to fix. 
+
 HStypes = {0:'Total',1:'Economy',2:'Research',3:'Military',5:'Military Built'
                     ,6:'Military Destroyed',4:'Military Lost',7:'Honor'}
 
