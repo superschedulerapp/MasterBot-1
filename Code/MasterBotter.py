@@ -96,6 +96,7 @@ def Store(Mem = Storage):
     os.chdir('..')
 
 def Maintenance(Sock,Storg,Mem =Storage):
+    '''A second attempt at using one bot to control other bots of the same type.'''
     Mem.Bots = {}
     Sock.send('NAMES #chaoscorebots\n')
     line = ''
