@@ -8,4 +8,4 @@ def initData():
         os.mkdir('./UserData/')
     if not os.path.isfile('./UserData/Data.txt'):
         for item in ['ChannelsPickle','UsersPickle','BotsPickle','LoginInfoPickle','LinksPickle','Data.txt']:
-            os.system('cp ./NewData/'+item+' ./UserData'+item+'\n')
+            os.system('cp ./NewData/'+item+' ./UserData/'+item+'\n')
