@@ -7,6 +7,7 @@ import cmds
 import time
 
 class Datas():
+    '''Data storage for where and how to log in.'''
     def __init__(self, Filer):
         self.CI = {}
         self.OU = {}
@@ -40,6 +41,8 @@ class Datas():
                 MasterBotter.Storage.Users[line[1:-3]] = int(line[-2:])
 
 def init(S,Stg):
+    '''Log the bot in and connect it to channels.'''
+    
     S.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     S.settimeout(300.0)
     S.connect((Stg.CI['HOST'],int(Stg.CI['PORT'])))
@@ -69,6 +72,9 @@ def init(S,Stg):
     return
 
 def running(S,Stg):
+    '''The main section which does anything. Monitors the socket which 
+    is connected to the IRC server and sends responses to it.'''
+    
     line = ''
     while not '\n' in line:
         try:line = line + S.recv(1)
